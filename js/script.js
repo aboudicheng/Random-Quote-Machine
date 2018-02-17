@@ -4,7 +4,7 @@ var currentQuote = '', currentAuthor = '';
 function getQuote() {
   $.ajax({
     method: 'GET',
-    url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
+    url: "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
     success : function(data, textStatus) {
 
       if (typeof data === 'string') {
