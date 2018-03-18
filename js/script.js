@@ -4,9 +4,9 @@ var currentQuote = '', currentAuthor = '';
 function getQuote() {
   $.ajax({
     method: 'GET',
-    url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
+    url: "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
     success : function(data, textStatus) {
-
+      console.log("success");
       if (typeof data === 'string') {
        data = JSON.parse(data); 
      }
@@ -14,25 +14,37 @@ function getQuote() {
      currentAuthor = data[0].title;
 
      $(".quote-text").animate({
-      opacity: 0
-    }, 500,
+      height: 'hide'
+    }, 1000,
     function() {
       $(this).animate({
-        opacity: 1
+        height: 'show'
       }, 500);
       $('#text').html(currentQuote);
     });
 
      $(".quote-author").animate({
-      opacity: 0
-    }, 500,
+      height: 'hide'
+    }, 1000,
     function() {
       $(this).animate({
-        opacity: 1
+        height: 'show'
       }, 500);
       $('#author').html(currentAuthor);
     });
 
+
+   },
+   error : function(xhr, textStatus, errorThrown) {
+    console.log('error');
+  },
+  cache: false,
+})
+}
+
+$(document).ready(function() {
+  getQuote();
+  $("#new-quote").on("click", getQuote); 
      var color = Math.floor(Math.random() * colors.length);
      $("html body").animate({
       backgroundColor: colors[color],
@@ -41,22 +53,4 @@ function getQuote() {
      $(".button").animate({
       backgroundColor: colors[color]
     }, 1000);
-   },
-   error : function(xhr, textStatus, errorThrown) {
-    console.log('error');
-  },
-  cache: false,
-  })
-}
-
-$(document).ready(function() {
-  getQuote();
-  $("#new-quote").on("click", getQuote); 
-
-
-    // .done(function(output) {
-    //   $("#text").html(output[0].content);
-    //   $("#author").html(output[0].title);
-    // });
-
   });
