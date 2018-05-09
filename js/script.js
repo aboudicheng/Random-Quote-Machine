@@ -5,56 +5,52 @@ function getQuote() {
   $.ajax({
     method: 'GET',
     url: "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
-    success : function(data, textStatus) {
+    success: function (data, textStatus) {
       console.log("success");
       if (typeof data === 'string') {
-       data = JSON.parse(data); 
-     }
-     currentQuote = data[0].content;
-     currentAuthor = data[0].title;
+        data = JSON.parse(data);
+      }
+      currentQuote = data[0].content;
+      currentAuthor = data[0].title;
+      var color = Math.floor(Math.random() * colors.length);
 
-     $(".quote-text").animate({
-      height: 'hide'
-    }, 1000,
-    function() {
-      $(this).animate({
-        height: 'show'
-      }, 500);
-      $('#text').html(currentQuote);
-    });
+      $("html body").animate({
+        backgroundColor: colors[color],
+        color: colors[color]
+      }, 1000);
+      $(".quote-button").animate({
+        backgroundColor: colors[color]
+      }, 1000);
 
-     $(".quote-author").animate({
-      height: 'hide'
-    }, 1000,
-    function() {
-      $(this).animate({
-        height: 'show'
-      }, 500);
-      $('#author').html(currentAuthor);
-    });
+      $(".quote-text").animate({
+        height: 'hide'
+      }, 1000,
+        function () {
+          $(this).animate({
+            height: 'show'
+          }, 500);
+          $('#text').html(currentQuote);
+        });
 
-   },
-   error : function(xhr, textStatus, errorThrown) {
-    console.log('error');
-  },
-  cache: false,
-})
+      $(".quote-author").animate({
+        height: 'hide'
+      }, 1000,
+        function () {
+          $(this).animate({
+            height: 'show'
+          }, 500);
+          $('#author').html(currentAuthor);
+        });
+
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      console.log('error');
+    },
+    cache: false,
+  })
 }
 
-function changeColor() {
-      var color = Math.floor(Math.random() * colors.length);
-     $("html body").animate({
-      backgroundColor: colors[color],
-      color: colors[color]
-    }, 1000);
-     $(".button").animate({
-      backgroundColor: colors[color]
-    }, 1000);
-    }
-
-$(document).ready(function() {
+$(document).ready(function () {
   getQuote();
-  $("#new-quote").on("click", getQuote); 
-  changeColor();
-  $("#new-quote").on("click", changeColor); 
+  $("#new-quote").on("click", getQuote);
 });
