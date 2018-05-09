@@ -56,4 +56,5 @@ $(document).ready(function() {
   getQuote();
   $("#new-quote").on("click", getQuote); 
   changeColor();
+  $("#new-quote").on("click", changeColor); 
 });
