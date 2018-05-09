@@ -32,7 +32,7 @@ function getQuote() {
       }, 500);
       $('#author').html(currentAuthor);
     });
-    function() {
+    function changeColor() {
       var color = Math.floor(Math.random() * colors.length);
      $("html body").animate({
       backgroundColor: colors[color],
