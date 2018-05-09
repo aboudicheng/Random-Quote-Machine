@@ -32,7 +32,16 @@ function getQuote() {
       }, 500);
       $('#author').html(currentAuthor);
     });
-
+    function() {
+      var color = Math.floor(Math.random() * colors.length);
+     $("html body").animate({
+      backgroundColor: colors[color],
+      color: colors[color]
+    }, 1000);
+     $(".button").animate({
+      backgroundColor: colors[color]
+    }, 1000);
+    }
 
    },
    error : function(xhr, textStatus, errorThrown) {
@@ -45,12 +54,5 @@ function getQuote() {
 $(document).ready(function() {
   getQuote();
   $("#new-quote").on("click", getQuote); 
-     var color = Math.floor(Math.random() * colors.length);
-     $("html body").animate({
-      backgroundColor: colors[color],
-      color: colors[color]
-    }, 1000);
-     $(".button").animate({
-      backgroundColor: colors[color]
-    }, 1000);
-  });
+     
+});
